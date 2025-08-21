@@ -1,0 +1,76 @@
+Program - 10
+
+🔹 Basics
+1. What is Amazon S3? S3 (Simple Storage Service) is AWS’s object storage service, designed for scalability, durability (11 nines), and high availability to store and retrieve any amount of data.
+2. What type of storage is S3?
+    * Object storage (not block or file storage). Data is stored as objects inside buckets.
+3. What is a Bucket in S3? A container for objects, uniquely named globally, tied to a specific region.
+4. What is an Object in S3? File + metadata + unique key inside a bucket.
+5. What is the maximum object size in S3?
+    * 5 TB (using multipart upload for >5 GB).
+
+🔹 Storage & Classes
+1. Name different S3 storage classes.
+    * Standard, Intelligent-Tiering, Express One Zone, Standard-IA, One Zone-IA, Glacier Instant Retrieval, Glacier Flexible Retrieval, Glacier Deep Archive.
+2. When would you use Intelligent-Tiering? When access patterns are unknown or changing, S3 auto-moves objects to cheaper tiers.
+3. What is the cheapest storage class in S3? Glacier Deep Archive (but retrieval can take hours).
+
+✅ Viva Questions for Program 9
+
+🔹 Permissions & Policy
+1. Q: What is a bucket policy? A: A bucket policy is a resource-based JSON policy that defines who can access the bucket and what actions they can perform.
+2. Q: In your program, why did you uncheck “Block all public access”? A: To allow public access to objects using their object URLs. Normally this is kept enabled for security, but we disabled it for demonstration.
+3. Q: What is the Principal in a bucket policy? A: Principal specifies who is allowed or denied access. For example, "Principal": "*" means everyone (public access).
+4. Q: Why do we add /* at the end of the ARN in the bucket policy? A: Because arn:aws:s3:::bucket-name/* applies the policy to all objects inside the bucket, not just the bucket itself.
+5. Q: What action did you allow in your policy, and what does it mean? A: The action was s3:GetObject. It allows read/download access to objects in the bucket.
+
+
+✅ Viva Questions for Program 8
+🔹 Basics
+1. Q: What is Amazon EC2? A: EC2 (Elastic Compute Cloud) is a web service that provides resizable compute capacity in the cloud. It lets you run virtual servers (instances).
+2. Q: Which operating system did you use in this program? A: Ubuntu (with apt) or Amazon Linux (with yum) depending on the AMI selected.
+3. Q: Why did you enable HTTP and HTTPS while launching the instance? A: To allow incoming web traffic on ports 80 (HTTP) and 443 (HTTPS) so that the website can be accessed in a browser.
+
+✅ Viva Questions for Program 7 (CloudWatch)
+🔹 Basics
+1. Q: What is Amazon CloudWatch? A: CloudWatch is AWS’s monitoring and observability service. It collects metrics, logs, and events from AWS resources and applications to monitor performance and set alarms.
+2. Q: What is a CloudWatch metric? A: A metric is a time-ordered set of data points that represent the behavior of a resource. Example: CPUUtilization of an EC2 instance.
+3. Q: What is a CloudWatch alarm? A: An alarm watches a single metric (or expression) and performs actions (like sending notifications) when the metric reaches a threshold.
+
+🔹 VPC Viva Questions & Answers
+1. What is a VPC in AWS?
+Answer: A VPC (Virtual Private Cloud) is a logically isolated section of AWS where you can launch AWS resources like EC2, RDS, and ELB in a virtual network that you define. It gives you control over IP addressing, subnets, route tables, internet connectivity, and security.
+
+2. What is the difference between Public and Private Subnets?
+Answer:
+* Public Subnet → Subnet with a route to the Internet Gateway (instances here can connect to the internet).
+* Private Subnet → Subnet without an Internet Gateway route (instances can’t be accessed directly from the internet).
+
+3. What is an Internet Gateway (IGW)?
+Answer: An Internet Gateway is a horizontally scaled, redundant, and highly available AWS component that allows communication between instances in your VPC and the internet.
+
+4. What is a Route Table in VPC?
+Answer: A Route Table contains rules (routes) that determine where network traffic is directed. Each subnet in a VPC must be associated with a route table.
+* Example: 0.0.0.0/0 → igw-xxxx means traffic goes to the internet.
+
+5. What is the default route in a VPC?
+Answer: Every route table has a default local route for communication inside the VPC (e.g., 10.0.0.0/16 → local).
+
+Program 2
+
+Basic Understanding
+1. What is Amazon EBS? Elastic Block Store (EBS) is a block storage service that provides persistent disks for EC2 instances.
+2. What is the difference between EBS and Instance Store?
+    * EBS: Persistent, data remains even if instance is stopped/terminated (unless deleted).
+    * Instance Store: Ephemeral, data is lost when instance stops/terminates.
+3. Why do we need EBS in addition to the root volume? For extra storage, separating OS and data, backup, or attaching/detaching volumes between instances.
+
+
+Basics
+Q1. What is Route 53? 👉 Route 53 is Amazon’s DNS (Domain Name System) web service. It translates domain names (like www.example.com) into IP addresses (like 192.0.2.23) so users can access websites.
+Q2. Why is it called Route 53? 👉 The name comes from port 53, the standard port used by DNS.
+Q3. What are the main functions of Route 53? 👉
+1. Domain registration (buy domains)
+2. DNS routing (map domain → IP)
+3. Health checks (monitor server health and route traffic)
+
