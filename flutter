@@ -1,0 +1,456 @@
+Experiment 1: Installation of Flutter and Create First App
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'First Flutter App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Hello Flutter"),
+        ),
+        body: Center(
+          child: Text("Welcome to Flutter"),
+        ),
+      ),
+    );
+  }
+}
+
+
+Experiment 2: Flutter Layout using Row and Column
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Row and Column Example"),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Flutter"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.star),
+                Icon(Icons.star),
+                Icon(Icons.star),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Experiment 3: Flutter Button Example
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Button Example"),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            child: Text("Click Me"),
+            onPressed: () {
+              print("Button Pressed");
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Experiment 4: TextField and User Input
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: InputExample(),
+    ),
+  );
+}
+
+class InputExample extends StatelessWidget {
+
+  final TextEditingController nameController =
+      TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("User Input"),
+      ),
+      body: Column(
+        children: [
+          TextField(
+            controller: nameController,
+            decoration: InputDecoration(
+              labelText: "Enter Name",
+            ),
+          ),
+
+          ElevatedButton(
+            child: Text("Submit"),
+            onPressed: () {
+              print(nameController.text);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Experiment 5: Navigation Between Screens
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: FirstScreen(),
+    ),
+  );
+}
+
+class FirstScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("First Screen"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: Text("Go to Second Screen"),
+
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SecondScreen(),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Screen"),
+      ),
+      body: Center(
+        child: Text("Welcome to Second Screen"),
+      ),
+    );
+  }
+}
+
+Experiment 6: ListView Example
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: ListExample(),
+    ),
+  );
+}
+
+class ListExample extends StatelessWidget {
+
+  final List<String> items = [
+    "Apple",
+    "Banana",
+    "Orange",
+    "Mango"
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("ListView Example"),
+      ),
+
+      body: ListView.builder(
+        itemCount: items.length,
+
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(items[index]),
+          );
+        },
+      ),
+    );
+  }
+}
+
+Experiment 7: Image Display in Flutter
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: ImageExample(),
+    ),
+  );
+}
+
+class ImageExample extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Image Example"),
+      ),
+
+      body: Center(
+        child: Image.network(
+          'https://flutter.dev/images/flutter-logo-sharing.png',
+        ),
+      ),
+    );
+  }
+}
+
+Experiment 8: Counter Application
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: CounterApp(),
+    ),
+  );
+}
+
+class CounterApp extends StatefulWidget {
+
+  @override
+  _CounterAppState createState() => _CounterAppState();
+}
+
+class _CounterAppState extends State<CounterApp> {
+
+  int count = 0;
+
+  void increment() {
+    setState(() {
+      count++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Counter App"),
+      ),
+
+      body: Center(
+        child: Text("Count: $count"),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: increment,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+Experiment 9: Fetch Data from REST API
+
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: ApiExample(),
+    ),
+  );
+}
+
+class ApiExample extends StatefulWidget {
+
+  @override
+  _ApiExampleState createState() => _ApiExampleState();
+}
+
+class _ApiExampleState extends State<ApiExample> {
+
+  String data = "Loading...";
+
+  Future<void> fetchData() async {
+
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts/1'),
+    );
+
+    if (response.statusCode == 200) {
+
+      final jsonData = jsonDecode(response.body);
+
+      setState(() {
+        data = jsonData['title'];
+      });
+
+    } else {
+
+      setState(() {
+        data = "Failed to load data";
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("REST API Example"),
+      ),
+
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Text(
+            data,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+For Experiment 9, add the http package in pubspec.yaml:
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.1
+
+Then run:
+flutter pub get
+
+
+
+Experiment 10: Simple Login UI
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: LoginPage(),
+    ),
+  );
+}
+
+class LoginPage extends StatelessWidget {
+
+  final TextEditingController usernameController =
+      TextEditingController();
+
+  final TextEditingController passwordController =
+      TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login Page"),
+      ),
+
+      body: Padding(
+        padding: EdgeInsets.all(20),
+
+        child: Column(
+          children: [
+
+            TextField(
+              controller: usernameController,
+              decoration: InputDecoration(
+                labelText: "Username",
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Password",
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              child: Text("Login"),
+
+              onPressed: () {
+                print(
+                  "Username: ${usernameController.text}"
+                );
+
+                print(
+                  "Password: ${passwordController.text}"
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
